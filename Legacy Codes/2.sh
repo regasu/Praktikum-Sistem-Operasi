@@ -1,40 +1,44 @@
-echo "Masukkan nilai : "
-read N
-
-a=0
-b=1
-
-for (( i=0; i<N; i++ ))    # LOOP UNTUK MENCETAK BILANGAN FIBONANCI
+exit=1;
+while [[ $exit -eq 1 ]];
 do
- echo -n "$a "
- fn=$((a + b))
- a=$b
- b=$fn
+
+echo "1. Menu Kalkulator Loop"
+echo "2. Exit"
+echo -n "masukkan pilihan : "
+read pilihan
+case $pilihan in
+1)
+echo -n "Masukkan Inputan bilangan acuan : "
+read acuan;
+echo -n "masukkan batasan : "
+read batasan;
+echo "penjumlahan\n"
+for ((b=1; b<=batasan ; b++));
+do
+let hasil=$acuan+$b
+echo -e "$acuan + $b = $hasil"
 done
-echo ""
-
-for (( x=1; x<=N; x++ ))   # LOOP UNTUK MENCETAK POLA ATAS SEJUMLAH N BARIS
+echo "pengurangan\n"
+for ((b=1; b<=batasan ; b++));
 do
- for (( y=1; y<x; y++ ))    # LOOP UNTUK MENCETAK SPASI
- do
-  printf " "
- done
- for (( y=x; y<=N; y++ ))   # LOOP UNTUK MENCETAK BINTANG
- do
-  printf "*"
- done
- echo ""
+let hasil=$acuan-$b
+echo -e "$acuan - $b = $hasil"
+done  
+echo "pembagian\n"
+for ((b=1; b<=batasan ; b++));
+do
+let hasil=$acuan/$b
+echo -e "$acuan / $b = $hasil"
+done  
+echo "perkalian\n"
+for ((b=1; b<=batasan ; b++));
+do
+let hasil=$acuan*$b
+echo -e "$acuan * $b = $hasil"
 done
-
-for (( x=2; x<=N; x++ ))   # LOOP UNTUK MENCETAK POLA BAWAH SEJUMLAH N-1 BARIS
-do
- for (( y=x; y<N; y++ ))    # LOOP UNTUK MENCETAK SPASI
- do
-  printf " "
- done
- for (( y=1; y<=x; y++ ))   # LOOP UNTUK MENCETAK BINTANG
- do
-  printf "*"
- done
- echo ""
+;;
+2)  
+echo "Thanks"
+break ;;
+esac
 done
