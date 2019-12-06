@@ -1,224 +1,186 @@
+#!/bin/bash
+
 clear
-i=0
-declare -a nama
-declare -a kode
-declare -a lahir
-declare -a mati
-declare -a agama
+loop=1;
+index_nohp=0;
+index_nama=0;
+index_alamat=0;
+index_pekerjaan=0;
 
-cetak()
-{
-	echo -e "Data yang telah dimasukkan : \n"			
-		for (( q=0; q<i;q++  ))
-		do
-			echo -e "Data ke $[q+1]\nNama Mayat            : ${nama[q]}\nNomor Kematian        : ${kode[q]}\nTempat, tanggal lahir : ${lahir[q]}\nTempat, tanggal wafat : ${mati[q]}\nAgama                 : ${agama[q]}\n"
-		done
-}
+	echo "======================Tugas Final Project Sistem Operasi========================"
+	echo "====================Rega Suryatama Amaril haq (18081010115)====================="
+	echo ""
 
-while :;
-do
-	echo -e "Sistem Informasi Data Mayat pada Tempat Pemakaman Umum\n\n1. Masukkan data mayat\n2. Lihat data mayat\n3. Cari data mayat\n4. Perbarui data mayat\n5. Hapus data mayat\n6. Keluar program\n"
- 	echo -n "Masukkan pilihan : "
- 	read pilih
+while [[ loop -eq 1 ]]; do
+	echo "-==-==-==-==-==-==-==- Selamat Datang Di Toko Bunga Mekar -==-==-==-==-==-==-==-"
 
- 	if (("$pilih" == 1));   # INPUT DATA
- 	then 
-  		clear
- 	 	echo -n "Nama Mayat            : "
- 	 	read nama[$i]
- 	 	echo -n "Nomor Kematian        : "
-  		read kode[$i]
-	  	echo -n "Tempat, tanggal lahir : "
-  		read lahir[$i]
-		echo -n "Tempat, tanggal wafat : "
-  		read mati[$i]
-	  	echo -n "Agama                 : "
-  		read agama[$i]
- 	 	i=`expr $i + 1`
+    echo "========================= Menu Pembelian bibit tanaman =========================";
+    echo "1. Identitas pembeli";
+    echo "2. Rincian Nama Tanaman dan Harga Tanaman";
+    echo "3. Transaksi Pembelian";
+    echo "4. Keluar Program";
+    echo -n "Masukkan Pilihan :"
+    read pil;
+    clear
+     
+    
+
+    case "$pil" in
+        "1" )
+		echo "==-==-Menu Identitas Pembeli==-==-"
+
+        echo -n "Nama pembeli 			:"
+        read nama[$index_nama];
+        let index_nama=$index_nama+1;
+
+        echo -n "Alamat pembeli 			:"
+        read alamat[$index_alamat];
+        let index_alamat=$index_alamat+1;
+
+        echo -n "Nomor handphone pembeli 	:"
+        read nohp[$index_nohp];
+        let index_nohp=$index_nohp+1;
+
+        echo -n "Pekerjaan Pembeli 		:"
+        read pekerjaan[index_pekerjaan];
+        let index_pekerjaan=$index_pekerjaan+1
+        
+            ;;
+
+        "2" )
+		echo "-==-==- Daftar Harga bunga -==-==-"
 		
-		if (("$i" >= 2))
-		then
-			for (( g=0; g<i-1; g++ ))
-			do
-	   			if (( "${kode[$i-1]}" == "${kode[g]}" ))
-				then
-		     			echo -e "\nNomor kematian ini sudah terdaftar!\nMasukan nomor yang lain!"
-					read
-					unset nama[$i-1]
-					unset kode[$i-1]
-					unset lahir[$i-1]
-					unset mati[$i-1]
-					unset agama[$i-1]
-					i=`expr $i - 1`
-					break
-	   			fi
-			done
-		fi
- 	 	clear
- 
- 	elif (("$pilih" == 2));   # TAMPILKAN DATA
- 	then
-  		if (( i == 0 ))
-  		then
-   			clear
-   			echo "Tidak ada data yang dapat ditampilkan"
-   			read
-   			clear
-  		else
-   			clear
-   			cetak
-   			read
-   			clear
-  		fi
+		echo "1. Bunga kaktus"		
+		echo "	 Harga : Rp15.000"
+        
+		echo "2. Bunga Lavender"
+        echo "	 Harga : Rp50.000"
 
- 	elif (("$pilih" == 3));   # CARI DATA
- 	then
-  		if (( i == 0))
-  		then
-   			clear
-   			echo "Tidak ada data yang dapat dicari"
-   			read
-   			clear
-  		else  
-   			clear
-      			echo -n "Masukkan nomor kematian yang ingin dicari : "
-      			read cari
-   
-      			k=0
-      			while (($cari != ${kode[$k]}))
-      			do
-    				k=`expr $k + 1`
-      			done
-      
-   			if (($cari == ${kode[$k]}));
-   			then
-    				echo -e "Nama Mayat            : ${nama[k]}\nNomor Kematian        : ${kode[k]}\nTempat, tanggal lahir : ${lahir[k]}\nTempat, tanggal wafat : ${mati[k]}\nAgama                 : ${agama[k]}\n"   
+		echo "3. Bunga kastuba"
+        echo "	 Harga : Rp70.000"
 
-   			else
-    				clear    
-    				echo -e "Data tidak ditemukan"
-   			fi
-   			read
-      			clear
-  		fi
-   
- 	elif (("$pilih" != 4 && "$pilih" != 2 && "$pilih" != 1 && "$pilih" != 3 && "$pilih" != 5 && "$pilih" != 6));   # APABILA MEMBERIKAN MASUKAN SELAIN 1-6
- 	then
-  		echo "Pilihan tidak valid"
-  		read
-  		clear
+		echo "4. Bunga kuping gajah"
+		echo "	 Harga : Rp125.000"
 
-	elif (( "$pilih" == 5 ));   # HAPUS DATA
-	then
-		if (( i == 0))
-  		then
-   			clear
-   			echo "Tidak ada data yang dapat dihapus"
-   			read
-   			clear
-  		else  
-   			clear
-   			cetak
-			echo -n "Masukkan nomor kematian : "
-      			read cari
-   
-      			k=0
-      			while (($cari != ${kode[$k]}))
-      			do
-    				k=`expr $k + 1`
-      			done
-      
-   			if (($cari == ${kode[$k]}));
-   			then			
-    				unset nama[k]
-				unset kode[k]
-				unset lahir[k]
-				unset mati[k]
-				unset agama[k]
+		echo "5. Tanaman hias bayam merah"
+		echo "	 Harga : Rp10.000"
 
-				if [[ -z ${kode[k]} ]]
-				then
-					if (($i == 1))
-					then
-						i=0
+		echo "6. Tanaman hias bambu klisik"
+		echo "	 Harga : Rp100.000"
+
+		echo "7. Tanaman hias agave king"
+		echo "	 Harga : Rp75.000"
+
+		echo "8. Tanaman hias kaktus Gymno Super"
+		echo "	 Harga : Rp150.000"
+
+		echo "9. Bunga Mawar"
+		echo "	 Harga : Rp40.000"
+
+		echo "10.Bunga Tulip"
+		echo "	 Harga : Rp265.000"
+
+		echo "11.Bunga Sakura"
+		echo "	 Harga : Rp235.000"
+		
+
+		echo "-==-==- Pembelian Jumlah Barang -==-==-"
+
+		echo -n "Masukkan Jumlah bunga yang akan dibeli 	: "
+		read bunga
+
+		for (( i = 1; i <= bunga; i++ )); do
+			echo -n "Masukkan pilihan bunga 	: "
+			read pil_bunga[i]
+		done		
+		    ;;
+
+
+
+        "3" )
+			echo "================== TRANSAKSI PEMBELIAN BUNGA TOKO BUNGA MEKAR =================="
+		HargaTotal=0
+        for (( i = 1; i <= bunga; i++ )); do
+        	if [[ pil_bunga[i] -eq 1 ]]; then
+        		let HargaTotal=HargaTotal+15000
+        	elif [[ pil_bunga[i] -eq 2 ]]; then
+        		let HargaTotal=HargaTotal+50000
+        	elif [[ pil_bunga[i] -eq 3 ]]; then
+        		let HargaTotal=HargaTotal+70000
+        	elif [[ pil_bunga[i] -eq 4 ]]; then
+        		let HargaTotal=HargaTotal+125000
+        	elif [[ pil_bunga[i] -eq 5 ]]; then
+        		let HargaTotal=HargaTotal+10000
+        	elif [[ pil_bunga[i] -eq 6 ]]; then
+        		let HargaTotal=HargaTotal+100000
+        	elif [[ pil_bunga[i] -eq 7 ]]; then
+        		let HargaTotal=HargaTotal+75000
+        	elif [[ pil_bunga[i] -eq 8 ]]; then
+        		let HargaTotal=HargaTotal+150000
+        	elif [[ pil_bunga[i] -eq 9 ]]; then
+        		let HargaTotal=HargaTotal+40000
+        	elif [[ pil_bunga[i] -eq 10 ]]; then
+        		let HargaTotal=HargaTotal+265000
+        	elif [[ pil_bunga[i] -eq 11 ]]; then
+        		let HargaTotal=HargaTotal+235000
+
+        	fi
+        done
+
+        echo "		==-==-==-==- Identitas Pembeli -==-==-==-=="
+        for (( i = 0; i < index_nama; i++ )); do
+        	echo "Nama  			:${nama[$i]}"
+        	echo "alamat  		:${alamat[$i]}"
+        	echo "nomor handphone  	:${nohp[$i]}"
+        	echo "pekerjaan pembeli 	:${pekerjaan[$i]}"
+        	echo ""
+
+        
+        done
+
+        echo "-==-==-==- jumlah Harga yang harus dibayar dan Nama Bunga yang Dibeli -==-==-==-"
+       for (( i = 0; i <= bunga; i++ )); do
+       		if [[ pil_bunga[i] -eq 1 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Kaktus"
+        	elif [[ pil_bunga[i] -eq 2 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Lavender"
+        	elif [[ pil_bunga[i] -eq 3 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Kastuba"
+        	elif [[ pil_bunga[i] -eq 4 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga kuping gajah"
+        	elif [[ pil_bunga[i] -eq 5 ]]; then
+        		echo "Bunga yg dibeli 	:Tanaman hias bayam merah"
+        	elif [[ pil_bunga[i] -eq 6 ]]; then
+        		echo "Bunga yg dibeli 	:Tanaman hias bambu klisik"
+        	elif [[ pil_bunga[i] -eq 7 ]]; then
+        		echo "Bunga yg dibeli 	:Tanaman hias agave king"
+        	elif [[ pil_bunga[i] -eq 8 ]]; then
+        		echo "Bunga yg dibeli 	:Tanaman hias kaktus Gymno"
+        	elif [[ pil_bunga[i] -eq 9 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Mawar"
+        	elif [[ pil_bunga[i] -eq 10 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Tulip"
+        	elif [[ pil_bunga[i] -eq 11 ]]; then
+        		echo "Bunga yg dibeli 	:Bunga Sakura"
+        	
+			fi
+		done
+
+        echo "Harga Total 		:$HargaTotal"
+        echo ""
+       
+       
+            ;;
+        
+        "4" )
+			echo "Terimakasih Telah Membeli Produk Kami:]"
+			echo ""
+			echo "Sekian Tugas Final Project Saya"
 	
-					elif (($i == 2))
-					then
-						for ((f=$k; f<i; f++))
-						do
-							nama[f]=${nama[$f+1]}
-							kode[f]=${kode[$f+1]}
-							lahir[f]=${lahir[$f+1]}
-							mati[f]=${mati[$f+1]}
-							agama[f]=${agama[$f+1]}
-						done
-						i=`expr $i - 1`
+        let loop=2;
+            ;;
+    esac
 
-					elif (($i > 2))
-					then
-						if [[ -n ${kode[$k-1]} ]]
-						then
-							for (( d=$k; d<i; d++ ))
-							do
-								nama[d]=${nama[$d+1]}
-								kode[d]=${kode[$d+1]}
-								lahir[d]=${lahir[$d+1]}
-								mati[d]=${mati[$d+1]}
-								agama[d]=${agama[$d+1]}
-							done
-						fi
-						i=`expr $i - 1`
-					fi									
-				fi
-   			else
-    				clear    
-    				echo -e "Data tidak ditemukan"
-   			fi
-   			read
-      			clear
-  		fi
 
-	elif (("$pilih" == 4));   # MEMPERBAHARUI DATA
-	then
-		if (( i == 0))
-  		then
-   			clear
-   			echo "Tidak ada data yang dapat diperbarui"
-   			read
-   			clear
-  		else  
-   			clear
-			cetak
-      			echo -e -n "\nMasukkan nomor kematian yang ingin diperbarui : "
-      			read baru
-   
-      			l=0
-      			while (($baru != ${kode[$l]}))
-      			do
-    				l=`expr $l + 1`
-      			done
-      
-   			if (($baru == ${kode[$l]}));
-   			then
-				echo -n "Nama Mayat            : "
-		 	 	read nama[$l]
-			  	echo -n "Tempat, tanggal lahir : "
-		  		read lahir[$l]
-				echo -n "Tempat, tanggal wafat : "
-		  		read mati[$l]
-			  	echo -n "Agama                 : "
-		  		read agama[$l]
-
- 	 			clear
-   			else
-    				clear    
-    				echo -e "Data tidak ditemukan"
-				read
-   			fi
-      			clear
-  		fi
- 
- 	else    # KELUAR PROGAM
-  		exit
- 	fi
 done
+
